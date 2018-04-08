@@ -100,8 +100,8 @@ public class AntoraMojo extends AbstractMojo {
     @Parameter(property = "geronimo-antora.url", defaultValue = "http://geronimo.apache.org")
     protected String url;
 
-    @Parameter(property = "geronimo-antora.local", defaultValue = "false")
-    private boolean local;
+    @Parameter(property = "geronimo-antora.local")
+    protected Boolean local;
 
     @Parameter
     private Sources sources;
@@ -202,6 +202,8 @@ public class AntoraMojo extends AbstractMojo {
     }
 
     private void init() {
+        local = local != null && local;
+
         if (sources == null) { // we use scm>url and only tags with a start path of ${project.basedir}/src/main/antora
             sources = new Sources();
             final Collection<String> branchesFilter = singletonList("master");

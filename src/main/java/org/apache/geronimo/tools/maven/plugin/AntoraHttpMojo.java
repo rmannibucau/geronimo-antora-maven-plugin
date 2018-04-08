@@ -33,6 +33,7 @@ public class AntoraHttpMojo extends AntoraMojo {
         } catch (final IOException e) {
             throw new MojoExecutionException(e.getMessage(), e);
         }
+        local = local == null || local; // parent assume it is "prod" so not local, here default is local (dev)
 
         getLog().info("Starting HTTP server");
         final CountDownLatch started = new CountDownLatch(1);
