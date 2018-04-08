@@ -76,10 +76,10 @@ public class AntoraMojo extends AbstractMojo {
     @Parameter(property = "geronimo-antora.antoraTemplate", defaultValue = "${project.basedir}/src/main/antora/antora-template.yml")
     private File antoraTemplate;
 
-    @Parameter(property = "geronimo-antora.siteTemplate", defaultValue = "${project.basedir}/src/main/antora/site-template.yml")
+    @Parameter(property = "geronimo-antora.siteTemplate", defaultValue = "${project.basedir}/src/main/antora/site.yml")
     private File siteTemplate;
 
-    @Parameter(property = "geronimo-antora.packageTemplate", defaultValue = "${project.basedir}/src/main/antora/package-template.json")
+    @Parameter(property = "geronimo-antora.packageTemplate", defaultValue = "${project.basedir}/src/main/antora/package.json")
     private File packageTemplate;
 
     @Parameter(property = "geronimo-antora.supplementalUiFiles", defaultValue = "${project.basedir}/src/main/antora/supplemental-ui")
@@ -279,7 +279,7 @@ public class AntoraMojo extends AbstractMojo {
 
     private void createMissingTemplates() throws IOException, MojoExecutionException {
         if (!antoraTemplate.exists()) {
-            antoraTemplate = createVolatileTemplate("antora.yml");
+            antoraTemplate = createVolatileTemplate("antora-template.yml");
             FileUtils.fileWrite(antoraTemplate, "UTF-8", "name: " + getSiteName() + "\n" +
                     "title: " + getTitleTemplate() + "\n" +
                     "version: '${antora.versions.release}'\n" +
