@@ -73,13 +73,13 @@ public class AntoraMojo extends AbstractMojo {
     @Parameter(defaultValue = "${repositorySystemSession}", readonly = true)
     private RepositorySystemSession repositorySystemSession;
 
-    @Parameter(property = "geronimo-antora.antoraTemplate", defaultValue = "${project.basedir}/src/main/antora/antora.yml")
+    @Parameter(property = "geronimo-antora.antoraTemplate", defaultValue = "${project.basedir}/src/main/antora/antora-template.yml")
     private File antoraTemplate;
 
-    @Parameter(property = "geronimo-antora.siteTemplate", defaultValue = "${project.basedir}/src/main/antora/site.yml")
+    @Parameter(property = "geronimo-antora.siteTemplate", defaultValue = "${project.basedir}/src/main/antora/site-template.yml")
     private File siteTemplate;
 
-    @Parameter(property = "geronimo-antora.packageTemplate", defaultValue = "${project.basedir}/src/main/antora/package.json")
+    @Parameter(property = "geronimo-antora.packageTemplate", defaultValue = "${project.basedir}/src/main/antora/package-template.json")
     private File packageTemplate;
 
     @Parameter(property = "geronimo-antora.supplementalUiFiles", defaultValue = "${project.basedir}/src/main/antora/supplemental-ui")
@@ -426,7 +426,10 @@ public class AntoraMojo extends AbstractMojo {
         //
         // TODO: antora uses a virtual filesystem, would be neat to be able to not require antora.yml
         // so we should plug in that extension point to do it (only the version changes in antora.yml)
-        FileUtils.copyFile(new File(workDirectory, antoraTemplate.getName()), new File(siteSource, antoraTemplate.getName()));
+        final File antoraYml = new File(siteSource, "antora.yml");
+        if (!antoraYml.exists()) {
+            FileUtils.copyFile(new File(workDirectory, antoraTemplate.getName()), antoraYml);
+        }
     }
 
     private void setupNodeEnv() throws InstallationException {

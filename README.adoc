@@ -10,9 +10,9 @@ but it is recommended to do some setup specifically for your project:
 
 1. create a documentation/ module
 2. in this module add a
-    a. `src/main/antora/antora.yml` (you can use the generated one to start)
+    a. `src/main/antora/antora-template.yml` (you can use the generated one to start)
     describing the way this version of the site is integrated in the global site
-    b. `src/main/antora/site.yml` (you can use the generated one to start)
+    b. `src/main/antora/site-template.yml` (you can use the generated one to start)
     listing the branches/tags to use for the website generation
     c. `src/main/antora/modules/ROOT/nav.adoc` containing the navigation menu
     c. `src/main/antora/modules/ROOT/pages/index.adoc` containing the home page
