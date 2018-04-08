@@ -1,0 +1,48 @@
+= Geronimo Antora Maven Plugin
+
+A simple wrapper of Antora to generate documentation website
+from git repositories.
+
+== Setup
+
+It has defaults to make it fast to start using
+but it is recommended to do some setup specifically for your project:
+
+1. create a documentation/ module
+2. in this module add a
+    a. `src/main/antora/antora.yml` (you can use the generated one to start)
+    describing the way this version of the site is integrated in the global site
+    b. `src/main/antora/site.yml` (you can use the generated one to start)
+    listing the branches/tags to use for the website generation
+    c. `src/main/antora/modules/ROOT/nav.adoc` containing the navigation menu
+    c. `src/main/antora/modules/ROOT/pages/index.adoc` containing the home page
+    c. `src/main/antora/modules/ROOT/pages/*.adoc` containing other documentation pages
+3. optionally you can customize the theme adding a `src/main/antora/supplemental_files` folder with UI customizations
+
+IMPORTANT: for now `antora.yml` must be committed to each branch to ensure we are correctly versionned. By default
+the plugin will add it and ensure it is in files "to commit" with git so just push it with your site update if needed.
+
+== Tips
+
+The plugin makes available the property `antora.versions.release`
+which is basically the project version without the snapshot suffix.
+
+It can be useful to make releases smooth and avoid to have a hardcoded dev version in the scm.
+Antora allows to test (asciidoc tests) if the branch is `master` and to show a message accordingly if you want.
+
+== Run
+
+[source,sh]
+----
+mvn geronimo-antora:run
+----
+
+It will create the website based on the (committed) branches
+in `target/site-documentation`.
+
+TIP: you can add `-Dgeronimo-antora.local=true` to use the local folder
+instead of the remote one. Note that this option only works with a generated site.yml.
+
+== More
+
+For more details on how Antora works you can visite the website https://docs.antora.org/.
