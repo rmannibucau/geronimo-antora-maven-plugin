@@ -40,7 +40,8 @@ public class AntoraHttpMojo extends AntoraMojo {
         try (final Cli cli = new Cli(ofNullable(meecrowaveArgs)
                 .orElseGet(() -> new String[]{
                         "--docbase=" + output.getAbsolutePath(),
-                        "--use-shutdown-hook=false"
+                        "--use-shutdown-hook=false",
+                        "--web-resource-cached=false"
                 })) {
             @Override
             protected void doWait(final Meecrowave meecrowave, final CommandLine line) {
